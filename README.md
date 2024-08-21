@@ -16,6 +16,14 @@ Can be found on  [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Taxi Trip data (lastest version)
 
+## Update Policy
+
+- According to TLC (Taxi Limousine Commisson), taxi-data is provided in different domains and forms.
+
+- TLC is the company that control and operate taxi industry in New York.
+
+- View more details in [this](https://www.nyc.gov/site/tlc/index.page)  
+
 ## Future Development 
 
 - Build a machine learning model on Google Colab to perform time series forecasting.    
