@@ -10,7 +10,7 @@
 
 ## Data 
 
-Can be found on  [Open Data NYC](https://opendata.cityofnewyork.us/data/) 
+References: [Open Data NYC](https://opendata.cityofnewyork.us/data/) 
 
 - Taxi data Open Data NYC (lastest version)
 
@@ -24,7 +24,7 @@ Can be found on  [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - TLC is the company that control and operate taxi industry in New York.
 
-- View more details in [this](https://www.nyc.gov/site/tlc/index.page)  
+- More details ? [Watch this](https://www.nyc.gov/site/tlc/index.page)  
 
 ## Future Development 
 
