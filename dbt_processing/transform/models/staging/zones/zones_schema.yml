@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: taxi_zone_lookup
+    columns:
+      - name: LocationID
+        data_type: "numeric"
+
