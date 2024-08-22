@@ -33,8 +33,6 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Build a machine learning model on Google Colab to perform time series forecasting.
 
-- Build Airbyte asset to automatically load data (CDC) from Postgres to MySQL (optional)
-
 - Build sensors in Dagster to automatically re-run assets if they fail
 
 ## What errors can be appeared in this pipeline ?
