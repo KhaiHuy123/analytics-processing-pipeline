@@ -138,6 +138,3 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
     MOTHER_DUCK_TOKEN=
     MOTHER_DUCK_DATABASE=
     MOTHER_DUCK_SHARE_URL=
-
-    
-
