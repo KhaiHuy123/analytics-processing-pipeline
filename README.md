@@ -45,7 +45,8 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Data Pipeline
 
-![image](https://github.com/user-attachments/assets/68eefa2f-9679-410d-98a2-82b114701621)
+![image](https://github.com/user-attachments/assets/a48e5c9a-8597-4960-a9f9-c035254ecba5)
+
 
 ## The data pipeline execution can be summarized as follows
 
