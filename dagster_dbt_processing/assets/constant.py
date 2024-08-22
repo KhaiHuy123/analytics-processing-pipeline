@@ -1484,4 +1484,3 @@ INFRAS_TS_GROUP_NAME = "infras_ts"
 
 # source
 SOURCE_GROUP_NAME = "data_source"
-SOURCE_CDC_GROUP_NAME = "data_source_cdc"

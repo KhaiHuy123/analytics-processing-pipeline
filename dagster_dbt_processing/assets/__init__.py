@@ -3,13 +3,13 @@ from . import (
     dbt,
     ingest_analytics, ingest_geometry, ingest_time_series, ingest_setup,
     preview_ingest_analytics, preview_ingest_geometry, preview_ingest_time_series,
-    infras_analytics, infras_time_series, data_source, data_source_cdc
+    infras_analytics, infras_time_series, data_source
 )
 from .constant import (
     DBT_GROUP_NAME, AIRBYTE_GROUP_NAME,
     INGEST_ANL_GROUP_NAME, INGEST_GEO_GROUP_NAME, INGEST_TS_GROUP_NAME, INGEST_SET_UP,
     PREVIEW_ANL_GROUP_NAME, PREVIEW_GEO_GROUP_NAME, PREVIEW_TS_GROUP_NAME,
-    INFRAS_ANL_GROUP_NAME, INFRAS_TS_GROUP_NAME, SOURCE_GROUP_NAME, SOURCE_CDC_GROUP_NAME
+    INFRAS_ANL_GROUP_NAME, INFRAS_TS_GROUP_NAME, SOURCE_GROUP_NAME
 )
 from dagster import load_assets_from_package_module
 
@@ -45,7 +45,4 @@ infras_ts_assets = load_assets_from_package_module(
 )
 data_source_assets = load_assets_from_package_module(
     package_module=data_source, group_name=SOURCE_GROUP_NAME
-)
-data_source_cdc_assets = load_assets_from_package_module(
-    package_module=data_source_cdc, group_name=SOURCE_CDC_GROUP_NAME
 )
