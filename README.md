@@ -31,7 +31,19 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Future Development 
 
-- Build a machine learning model on Google Colab to perform time series forecasting.    
+- Build a machine learning model on Google Colab to perform time series forecasting.
+
+- Build Airbyte asset to automatically load data (CDC) from Postgres to MySQL (optional)
+
+- Build sensors in Dagster to automatically re-run assets if they fail
+
+## What errors can be appeared in this pipeline ?
+
+- Case 1: request timeout (because of Mother Duck Server)
+
+- Case 2: Parameter of provided APIs is changed or name of columns changed, ....
+
+- That why we need sensors to solve these problems
 
 ## Data Pipeline
 
