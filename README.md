@@ -1,12 +1,15 @@
 # Taxi-NYC-Processing Pipeline 
-[DEMO VIDEO](https://drive.google.com/drive/folders/1RyPruEoPn-zYbq3FFYwOhJEzLBbye8sv?usp=sharing)
+- [DEMO VIDEO](https://drive.google.com/drive/folders/1RyPruEoPn-zYbq3FFYwOhJEzLBbye8sv?usp=sharing)
 
 ## Dashboard
-![image](https://github.com/user-attachments/assets/bfc1f9a0-7a0d-4202-9bd4-7e74e1c4e266)
 
-![image](https://github.com/user-attachments/assets/8f13d24b-e7e9-408a-ac05-9312ad633a42)
+![image](https://github.com/user-attachments/assets/0ac7c933-aafe-40b4-8645-e99d9d78041e)
 
-![image](https://github.com/user-attachments/assets/54efba09-7009-49b4-b8ca-a04af4fef26b)
+![image](https://github.com/user-attachments/assets/73b4cf05-b51e-4b38-93bf-29767fc8bab2)
+
+![image](https://github.com/user-attachments/assets/9237f4d8-2688-40ef-bf87-9f1e86a4bd24)
+
+![image](https://github.com/user-attachments/assets/18958f99-a359-4f99-bf99-0dab6078d530)
 
 ## Data 
 
@@ -28,7 +31,19 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Future Development 
 
-- Build a machine learning model on Google Colab to perform time series forecasting.    
+- Build a machine learning model on Google Colab to perform time series forecasting.
+
+- Build Airbyte asset to automatically load data (CDC) from Postgres to MySQL (optional)
+
+- Build sensors in Dagster to automatically re-run assets if they fail
+
+## What errors can be appeared in this pipeline ?
+
+- Case 1: request timeout (because of Mother Duck Server)
+
+- Case 2: Parameter of provided APIs is changed or name of columns changed, ....
+
+- That why we need sensors to solve these problems
 
 ## Data Pipeline
 
