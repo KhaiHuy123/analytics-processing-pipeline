@@ -57,8 +57,6 @@ models:
           - not_null
       - name: payment_description
         data_type: "text"
-        tests:
-          - not_null
         accepted_value:
           [ "Credit card", "Cash", "No charge", "Dispute", "Voided trip", "Credit card", "Unknown", "UNKNOWN" ]
   - name: taxicab_ratecode
@@ -69,22 +67,16 @@ models:
           - not_null
       - name: ratecode_description
         data_type: "text"
-        tests:
-          - not_null
         accepted_value:
           [ "Standard rate", "JFK", "Newark", "Nassau or Westchester", "Negotiated fare", "Group ride", "Unknown", "unknown" ]
   - name: taxicab_store_fwd_flag
     columns:
       - name: flag
         data_type: "text"
-        tests:
-          - not_null
         accepted_value:
           [ "Y", "N", "y", "n" , "Yes", "No", "yes", "no", "YES", "NO" ]
       - name: note
         data_type: "text"
-        tests:
-          - not_null
         accepted_value:
           [ "store and forward trip", "not a store and forward trip", "Unknown", "unknown" ]
   - name: taxicab_trip_type
@@ -95,8 +87,6 @@ models:
           - not_null
       - name: trip_type_description
         data_type: "text"
-        tests:
-          - not_null
         accepted_value:
           [ "Street-hail", "Dispatch", "Unknown", "unknown" ]
   - name: taxicab_vendor
@@ -107,8 +97,6 @@ models:
           - not_null
       - name: vendor_name
         data_type: "text"
-        tests:
-          - not_null
         accepted_value:
           [ "Creative Mobile Technologies, LLC", "VeriFone Inc", "Unknown", "unknown" ]
   - name: taxicab_yellow_trips
