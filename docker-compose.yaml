@@ -25,7 +25,7 @@ services:
     networks:
       - thes_network
 
-  # MySQL
+  # mysql
   thes_mysql:
     build:
       context: ./datasource_process
