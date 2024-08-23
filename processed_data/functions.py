@@ -6,14 +6,15 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+import duckdb
 
 
 def create_logo(image_path):
     st.sidebar.image(image_path, caption="")
 
 
-def create_data_expander(df, caption='Data Preview', use_container_width=True):
-    with st.expander(caption):
+def create_data_expander(df, caption='Data Preview', use_container_width=True, expanded=False):
+    with st.expander(caption, expanded):
         st.dataframe(df, use_container_width=use_container_width) if use_container_width else st.dataframe(df)
 
 
@@ -82,20 +83,23 @@ def select_data(data: pd.DataFrame, referenced_elem: list, selected_elem: list):
     return data_selected
 
 
+def select_data_using_sql_statement(data: pd.DataFrame, col_name, threshold=100):
+    data_selected = duckdb.query(f"""
+        SELECT * FROM data
+        where {col_name} >= {threshold}
+    """).df()
+    return data_selected
+
+
 def define_gy_distance_moving_filter(label, data: pd.DataFrame, col_filter, short_options=True):
     options = data[col_filter].unique()
     pick_up = st.sidebar.multiselect(label=label, options=options, default=options[0:10] if short_options else options)
     return pick_up
 
 
-def define_gy_location_filter(label, data: pd.DataFrame, col_filter: str):
+def define_filter(label, data: pd.DataFrame, col_filter: str):
     options = data[col_filter].unique()
     pick_up = st.sidebar.multiselect(label=label, options=options, default=options)
-    return pick_up
-
-
-def define_fhv_location_filter(label, data: pd.DataFrame, col_filter: str):
-    pick_up = st.sidebar.multiselect(label=label, options=data[col_filter].unique(), default=data[col_filter].unique())
     return pick_up
 
 
@@ -157,7 +161,7 @@ def create_explanation_distance_moving_details_markdown():
         
         _Trend of long/short distance-moving trips is determined by using line plot for all records in dataset._
         
-        _"Index" label represents to records in 1 month-data of taxi-trips provided by Open Data ( view data above )._
+        _"Index" label represents to collected records of taxi-trips provided by Open Data ( view data above )._
         
         _Long distance trips are the trips that have distance moving average larger or equal than 100.
          Short distance is the reverse case_

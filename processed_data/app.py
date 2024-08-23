@@ -50,7 +50,7 @@ with feature_1:
                 file_path="./yellowpopularpickuplocation/yellowpopularpickuplocation.parquet",
                 show_data=False
             )
-            y_pick_up_list_borough = define_gy_location_filter(
+            y_pick_up_list_borough = define_filter(
                 label="Filter Yellow Picking Up Locations",
                 data=popular_y_pickUp_df,
                 col_filter="borough"
@@ -99,7 +99,7 @@ with feature_1:
                 file_path="./yellowpopulardropofflocation/yellowpopulardropofflocation.parquet",
                 show_data=False
             )
-            y_drop_off_list_borough = define_gy_location_filter(
+            y_drop_off_list_borough = define_filter(
                 label="Filter Yellow Dropping Off Locations",
                 data=popular_y_dropOff_df,
                 col_filter="borough"
@@ -255,7 +255,7 @@ with feature_1:
                 file_path="./greenpopularpickuplocation/greenpopularpickuplocation.parquet",
                 show_data=False
             )
-            g_pick_up_list_borough = define_gy_location_filter(
+            g_pick_up_list_borough = define_filter(
                 label="Filter Green Picking Up Locations",
                 data=popular_g_pickUp_df,
                 col_filter="borough"
@@ -304,7 +304,7 @@ with feature_1:
                 file_path="./greenpopulardropofflocation/greenpopulardropofflocation.parquet",
                 show_data=False
             )
-            g_drop_off_list_borough = define_gy_location_filter(
+            g_drop_off_list_borough = define_filter(
                 label="Filter Green Dropping Off  Locations",
                 data=popular_g_dropOff_df,
                 col_filter="borough"
@@ -459,7 +459,7 @@ with feature_1:
                 file_path="./fhvpopularpickuplocation/fhvpopularpickuplocation.parquet",
                 show_data=False
             )
-            fhv_pick_up_location = define_fhv_location_filter(
+            fhv_pick_up_location = define_filter(
                 label="Filter FHV Picking Up Locations",
                 data=popular_fhv_pickUp_df,
                 col_filter="borough",
@@ -508,7 +508,7 @@ with feature_1:
                 file_path="./fhvpopulardropofflocation/fhvpopulardropofflocation.parquet",
                 show_data=False
             )
-            fhv_drop_off_location = define_fhv_location_filter(
+            fhv_drop_off_location = define_filter(
                 label="Filter FHV Dropping Off Locations",
                 data=popular_fhv_dropOff_df,
                 col_filter="borough",
@@ -727,7 +727,7 @@ with feature_2:
         file_path='./versionofvehicles/versionofvehicles.parquet',
         show_data=False
     )
-    version_of_vehicles_filter = define_fhv_location_filter(
+    version_of_vehicles_filter = define_filter(
         label="Filter Version Of Vehicles",
         data=version_of_vehicles,
         col_filter="vehicle_year",
@@ -741,7 +741,6 @@ with feature_2:
         caption="Version Of Vehicles",
         show_data=True
     )
-
     # ------------------------------------------------------------------------------------------------------------------
 
     reported_vehicle = upload_data(
@@ -1003,3 +1002,138 @@ with feature_2:
             title="Trend Of Service's High Volume Farebox",
         )
         create_explanation_farebox_details_markdown()
+
+    # ------------------------------------------------------------------------------------------------------------------
+
+    additional_unpaid_money_option = create_select_box(
+        label="Group Additional Money Per Bills For Service",
+        list_elem=[
+            "Green",
+            "Yellow",
+        ],
+        key="additional_money_option"
+    )
+    additional_money_frequency_option = create_select_box(
+        label="Frequency Of Group Additional Money Per Bills",
+        list_elem=[
+            0,
+            10,
+            100,
+            1000,
+            5000
+        ],
+        key="additional_money_frequency_option"
+    )
+
+    # ------------------------------------------------------------------------------------------------------------------
+
+    if additional_unpaid_money_option == "Green":
+        g_additional_money = upload_data(
+            key='g_additional_money',
+            direction_str="green_additional_money",
+            extension='parquet',
+            caption="Green Additional Money",
+            file_path='./greengroupadditionalmoney/greengroupadditionalmoney.parquet',
+            show_data=False
+        )
+        filtered_data_g_additional_money = select_data_using_sql_statement(
+            data=g_additional_money,
+            col_name="frequency",
+            threshold=additional_money_frequency_option
+        )
+        create_data_expander(
+            df=filtered_data_g_additional_money,
+            caption="Green Additional Money",
+        )
+    else:
+        y_additional_money = upload_data(
+            key='y_additional_money',
+            direction_str="yellow_additional_money",
+            extension='parquet',
+            caption="Yellow Additional Money",
+            file_path='./yellowgroupadditionalmoney/yellowgroupadditionalmoney.parquet',
+            show_data=False
+        )
+        filtered_data_y_additional_money = select_data_using_sql_statement(
+            data=y_additional_money,
+            col_name="frequency",
+            threshold=additional_money_frequency_option
+        )
+        create_data_expander(
+            df=filtered_data_y_additional_money,
+            caption="Yellow Additional Money",
+        )
+
+    if additional_unpaid_money_option == "Green":
+        g_unpaid_money = upload_data(
+            key='g_unpaid_money',
+            direction_str="g_unpaid_money",
+            extension='parquet',
+            caption="Green Unpaid Money",
+            file_path='./greenunpaidmoney/greenunpaidmoney.parquet',
+            show_data=False
+        )
+        g_group_unpaid_money = define_filter(
+            label="Filter Payment Description For Green Unpaid Money",
+            data=g_unpaid_money,
+            col_filter="payment_description"
+        )
+        filtered_data_y_pickUp = filter_data(
+            data=g_unpaid_money,
+            referenced_elem=g_unpaid_money.columns[-1:],
+            selected_elem=[
+                g_group_unpaid_money
+            ],
+            show_data=True,
+            caption="Green Unpaid Money"
+        )
+    else:
+        y_unpaid_money = upload_data(
+            key='y_unpaid_money',
+            direction_str="y_unpaid_money",
+            extension='parquet',
+            caption="Yellow Unpaid Money",
+            file_path='./yellowunpaidmoney/yellowunpaidmoney.parquet',
+            show_data=False
+        )
+        y_group_unpaid_money = define_filter(
+            label="Filter Payment Description For Yellow Unpaid Money",
+            data=y_unpaid_money,
+            col_filter="payment_description"
+        )
+        filtered_data_y_group_unpaid_money = filter_data(
+            data=y_unpaid_money,
+            referenced_elem=y_unpaid_money.columns[-1:],
+            selected_elem=[
+                y_group_unpaid_money
+            ],
+            show_data=True,
+            caption="Yellow Unpaid Money"
+        )
+
+    # ------------------------------------------------------------------------------------------------------------------
+    create_header("_New Driver Application_")
+
+    new_driver_application = upload_data(
+        key='new_driver_application',
+        direction_str="new_driver_application",
+        extension='parquet',
+        caption="New Driver Application",
+        file_path='./tlcnewdriverapplicationstat/tlcnewdriverapplicationstat.parquet',
+        show_data=False
+    )
+
+    new_driver_application_status = define_filter(
+        label="Filter New Application Status",
+        data=new_driver_application,
+        col_filter="status"
+    )
+    filtered_data_y_pickUp = filter_data(
+        data=new_driver_application,
+        referenced_elem=new_driver_application.columns[3:4],
+        selected_elem=[
+            new_driver_application_status
+        ],
+        show_data=True,
+        caption="New Driver Application"
+    )
