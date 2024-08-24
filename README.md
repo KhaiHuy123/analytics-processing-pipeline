@@ -148,11 +148,11 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Everytime you execute pipeline, MinIO will store all versions of data. MinIO is used as GitHub in this case. 
 
-## How to use this pipline?
+## How to use this pipeline?
 
-- First, you need to create Mother Duck account. [Mother Duck](https://motherduck.com/) is the Cloud Service that provide us availability of using [DuckDB](https://duckdb.org/) on cloud enviroment.
+- First, you need to create Mother Duck account. [Mother Duck](https://motherduck.com/) is the Cloud Service that provide us availability of using [DuckDB](https://duckdb.org/) on cloud environment.
 
-- Next, make sure you have installed [Docker](https://www.docker.com/) on your local machine. If not, that's ok, because they will help you with that. How to use Docker Desstop ? [Watch this](https://www.youtube.com/watch?v=7y50rZItKCQ)
+- Next, make sure you have installed [Docker](https://www.docker.com/) on your local machine. If not, that's ok, because they will help you with that. How to use Docker Desktop ? [Watch this](https://www.youtube.com/watch?v=7y50rZItKCQ)
 
 - Finally, you can clone this respository and execute pipeline. Read [run.md](https://github.com/KhaiHuy123/taxi-nyc-processing-pipeline/blob/main/run.md) for more details.
 

@@ -12,7 +12,7 @@ services:
       - ./datasource_init/warehouse_setup/:/docker-entrypoint-initdb.d/
       - ./datasource_init/data:/data/
       - ./postgresql:/var/lib/postgresql/data/
-      - ./shared_volume:/shared_data/
+      - shared_volume:/shared_data/
     ports:
       - "5432:5432"
     env_file:
@@ -34,7 +34,7 @@ services:
     container_name: thes_mysql
     volumes:
       - ./datasource_process/warehouse_setup/:/docker-entrypoint-initdb.d/
-      - ./shared_volume:/shared_data/
+      - shared_volume:/shared_data/
     ports:
       - "3306:3306"
     environment:
@@ -75,8 +75,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./shared_volume:/opt/dagster/app/datasource_init/data
-      - ./shared_volume_app:/opt/dagster/app/processed_data
+      - shared_volume:/opt/dagster/app/datasource_init/data
+      - shared_volume_app:/opt/dagster/app/processed_data
 
     networks:
       - thes_network
