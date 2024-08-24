@@ -158,7 +158,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - How to clone this respository ? [Watcth this](https://www.youtube.com/watch?v=8Dd7KRpKeaE)
 
-- After cloning section, just run `docker-compose build` and run `docker-compose up -d` after all containers are built .
+- After cloning section, just run `docker-compose build` and run `docker-compose up -d` after all containers are built.
 
 - If you are using Docker Destop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good Luck !
 
