@@ -1,8 +1,0 @@
-
-pendulum==3.0.0
-ipython_genutils==0.2.0
-dbt-core==1.7.9
-dbt-postgres==1.7.9
-dbt-trino==1.7.1
-dbt==1.0.0.37.12
-protobuf==4.24.3
