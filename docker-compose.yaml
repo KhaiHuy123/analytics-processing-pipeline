@@ -1,0 +1,216 @@
+
+services:
+
+  # psql
+  thes_psql:
+    build:
+      context: ./datasource_init
+      dockerfile: ./Dockerfile
+    image: postgres:16-alpine
+    container_name: thes_psql
+    volumes:
+      - ./datasource_init/warehouse_setup/:/docker-entrypoint-initdb.d/
+      - ./datasource_init/data:/data/
+      - ./postgresql:/var/lib/postgresql/data/
+      - ./shared_volume:/shared_data/
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=admin_database # ${POSTGRES_DB}$
+      - POSTGRES_USER=admin_user # ${POSTGRES_USER}$
+      - POSTGRES_PASSWORD=admin123 # ${POSTGRES_PASSWORD}$
+      - POSTGRES_HOST_AUTH_METHOD=trust # ${POSTGRES_HOST_AUTH_METHOD}$
+    networks:
+      - thes_network
+
+  # mysql
+  thes_mysql:
+    build:
+      context: ./datasource_process
+      dockerfile: ./Dockerfile
+    image: mysql:8.0
+    container_name: thes_mysql
+    volumes:
+      - ./datasource_process/warehouse_setup/:/docker-entrypoint-initdb.d/
+      - ./shared_volume:/shared_data/
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql_root_password # ${MYSQL_ROOT_PASSWORD}$
+      - MYSQL_DATABASE=mysql_database # ${MYSQL_DATABASE}$
+      - MYSQL_USER=mysql_user # ${MYSQL_USER}$
+      - MYSQL_PASSWORD=mysql_password # ${MYSQL_PASSWORD}$
+    networks:
+      - thes_network
+
+  # dbt
+  dbt_processing:
+    build:
+      context: ./dbt_processing/transform
+      dockerfile: ./Dockerfile
+    image: dbt_processing:latest
+    container_name: dbt_processing
+    depends_on:
+      thes_psql:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    networks:
+      - thes_network
+    ports:
+      - "4001:4001"
+
+  # pipeline
+  dagster_dbt_processing:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: dagster_dbt_processing:latest
+    container_name: dagster_dbt_processing
+    depends_on:
+      thes_psql:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    volumes:
+      - ./shared_volume:/opt/dagster/app/datasource_init/data
+      - ./shared_volume_app:/opt/dagster/app/processed_data
+
+    networks:
+      - thes_network
+    ports:
+      - "4000:4000"
+
+  # dashboard_app
+  dashboard_app:
+      build:
+        context: ./processed_data
+        dockerfile: ./Dockerfile
+      container_name: dashboard_app
+      env_file:
+        - .env
+      depends_on:
+        dagster_dbt_processing:
+          condition: service_completed_successfully
+      volumes:
+        - ./shared_volume_app:/usr/src/app
+      networks:
+        - thes_network
+
+  # dagster_home
+  dagster:
+    build:
+      context: ./dagster_home
+      dockerfile: ./Dockerfile
+    image: thes_dagster
+    container_name: dagster
+    depends_on:
+      dagster_dbt_processing:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    networks:
+      - thes_network
+    external_links:
+      - dagster_dbt_processing:dagster_dbt_processing
+      - dagster_postgres:dagster_postgres
+
+  dagster_postgres:
+    image: postgres:16
+    container_name: dagster_postgres
+    depends_on:
+      dagster_dbt_processing:
+        condition: service_completed_successfully
+    ports:
+      - "5433:5433"
+    env_file:
+      - .env
+    environment:
+      - DAGSTER_PG_DB=postgres # ${DAGSTER_PG_DB}$
+      - DAGSTER_PG_USER=admin_user # ${DAGSTER_PG_USER}$
+      - DAGSTER_PG_PASSWORD=admin123 # ${DAGSTER_PG_PASSWORD}$
+      - DAGSTER_PG_HOST=dagster_postgres # ${DAGSTER_PG_HOST}$
+      - DAGSTER_PG_DB_HOST_AUTH_METHOD=trust #${DAGSTER_PG_DB_HOST_AUTH_METHOD}$
+    networks:
+      - thes_network
+    external_links:
+      - dagster:dagster
+
+  dagster_webserver:
+    image: thes_dagster:latest
+    entrypoint:
+      - dagster-webserver
+      - -h
+      - "0.0.0.0"
+      - -p
+      - "3000"
+      - -w
+      - workspace.yaml
+    container_name: dagster_webserver
+    depends_on:
+      dagster:
+        condition: service_completed_successfully
+    volumes: # Make docker client accessible, so we can terminate containers from dagit
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dagster_home:/opt/dagster/dagster_home
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    networks:
+      - thes_network
+
+  dagster_deamon:
+    image: thes_dagster:latest
+    entrypoint:
+      - dagster-daemon
+      - run
+      - -w
+      - workspace.yaml
+    container_name: dagster_deamon
+    depends_on:
+      dagster:
+        condition: service_completed_successfully
+    volumes: # Make docker client accessible, so we can launch containers using host docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dagster_home:/opt/dagster/dagster_home
+    env_file:
+      - .env
+    networks:
+      - thes_network
+
+  # minio
+  thes_minio:
+    hostname: minio
+    image: minio/minio
+    container_name: thes_minio
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    command: [ "server", "/data", "--console-address", ":9001" ]
+    volumes:
+      - ./minio:/data
+    environment:
+      - MINIO_ROOT_USER=minio # ${MINIO_ROOT_USER}$
+      - MINIO_ROOT_PASSWORD=minio123 # ${MINIO_ROOT_PASSWORD}$
+      - MINIO_ACCESS_KEY=minio # ${MINIO_ACCESS_KEY}$
+      - MINIO_SECRET_KEY=minio123 # ${MINIO_SECRET_KEY}$
+    networks:
+      - thes_network
+
+volumes:
+  shared_volume:
+    driver: local
+    name: shared_volume
+  shared_volume_app:
+    driver: local
+    name: extra_shared_volume
+
+networks:
+  thes_network:
+    driver: bridge
+    name: thes_network

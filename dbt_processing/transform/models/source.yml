@@ -1,0 +1,48 @@
+
+version: 2
+
+sources:
+  - name: report_staging
+    database: admin_database
+    schema: report
+    tables:
+      - name: data_reports_monthly
+      - name: shl_meter_shops
+      - name: tlc_new_driver_application_stat
+  - name: services_staging
+    database: admin_database
+    schema: services
+    tables:
+      - name: agg_base_license
+      - name: agg_base_name
+      - name: base
+      - name: fhv_base_aggregate_report
+      - name: fhv_vehicles
+      - name: inspect_base
+      - name: lost_property_contact
+      - name: lost_property_reported_base
+      - name: lost_property_vehicles
+      - name: shl_permits
+      - name: shl_taxi_initial_inspect
+      - name: veh
+      - name: vehicle_name
+      - name: vehicle_type
+      - name: vehicle_year_fhv_vehicle
+      - name: wheelchair_access
+  - name: zones_staging
+    database: admin_database
+    schema: zones
+    tables:
+      - name: taxi_zone_lookup
+  - name: trips_staging
+    database: admin_database
+    schema: trips
+    tables:
+      - name: fhv_trips
+      - name: green_trips
+      - name: yellow_trips
+      - name: payment_type
+      - name: ratecode
+      - name: vendor
+      - name: store_fwd_flag
+      - name: trip_type

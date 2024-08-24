@@ -1,0 +1,6 @@
+
+load_from:
+  - grpc_server:
+      host: dagster_dbt_processing
+      port: 4000
+      location_name: "dagster_dbt_processing"
