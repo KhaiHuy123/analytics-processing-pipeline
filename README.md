@@ -37,7 +37,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## What errors can be appeared in this pipeline ?
 
-- Case 1: request timeout (because of Mother Duck Server)
+- Case 1: Request timeout (because of Mother Duck Server)
 
 - Case 2: Parameter of provided APIs is changed or name of columns changed, ....
 
