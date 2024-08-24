@@ -208,7 +208,7 @@ volumes:
     name: shared_volume
   shared_volume_app:
     driver: local
-    name: extra_shared_volume
+    name: shared_volume_app
 
 networks:
   thes_network:
