@@ -18,10 +18,10 @@ services:
     env_file:
       - .env
     environment:
-      - POSTGRES_DB=admin_database # ${POSTGRES_DB}$
-      - POSTGRES_USER=admin_user # ${POSTGRES_USER}$
-      - POSTGRES_PASSWORD=admin123 # ${POSTGRES_PASSWORD}$
-      - POSTGRES_HOST_AUTH_METHOD=trust # ${POSTGRES_HOST_AUTH_METHOD}$
+      - POSTGRES_DB=admin_database 
+      - POSTGRES_USER=admin_user 
+      - POSTGRES_PASSWORD=admin123 
+      - POSTGRES_HOST_AUTH_METHOD=trust 
     networks:
       - thes_network
 
@@ -38,10 +38,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=mysql_root_password # ${MYSQL_ROOT_PASSWORD}$
-      - MYSQL_DATABASE=mysql_database # ${MYSQL_DATABASE}$
-      - MYSQL_USER=mysql_user # ${MYSQL_USER}$
-      - MYSQL_PASSWORD=mysql_password # ${MYSQL_PASSWORD}$
+      - MYSQL_ROOT_PASSWORD=mysql_root_password 
+      - MYSQL_DATABASE=mysql_database 
+      - MYSQL_USER=mysql_user 
+      - MYSQL_PASSWORD=mysql_password 
     networks:
       - thes_network
 
@@ -128,11 +128,11 @@ services:
     env_file:
       - .env
     environment:
-      - DAGSTER_PG_DB=postgres # ${DAGSTER_PG_DB}$
-      - DAGSTER_PG_USER=admin_user # ${DAGSTER_PG_USER}$
-      - DAGSTER_PG_PASSWORD=admin123 # ${DAGSTER_PG_PASSWORD}$
-      - DAGSTER_PG_HOST=dagster_postgres # ${DAGSTER_PG_HOST}$
-      - DAGSTER_PG_DB_HOST_AUTH_METHOD=trust #${DAGSTER_PG_DB_HOST_AUTH_METHOD}$
+      - DAGSTER_PG_DB=postgres 
+      - DAGSTER_PG_USER=admin_user 
+      - DAGSTER_PG_PASSWORD=admin123 
+      - DAGSTER_PG_HOST=dagster_postgres 
+      - DAGSTER_PG_DB_HOST_AUTH_METHOD=trust 
     networks:
       - thes_network
     external_links:
@@ -195,10 +195,10 @@ services:
     volumes:
       - ./minio:/data
     environment:
-      - MINIO_ROOT_USER=minio # ${MINIO_ROOT_USER}$
-      - MINIO_ROOT_PASSWORD=minio123 # ${MINIO_ROOT_PASSWORD}$
-      - MINIO_ACCESS_KEY=minio # ${MINIO_ACCESS_KEY}$
-      - MINIO_SECRET_KEY=minio123 # ${MINIO_SECRET_KEY}$
+      - MINIO_ROOT_USER=minio 
+      - MINIO_ROOT_PASSWORD=minio123
+      - MINIO_ACCESS_KEY=minio 
+      - MINIO_SECRET_KEY=minio123 
     networks:
       - thes_network
 
