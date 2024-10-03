@@ -33,7 +33,13 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Build a machine learning model on Google Colab to perform time series forecasting.
 
-- Build sensors in Dagster to automatically re-run assets if they fail
+- Build sensors in Dagster to automatically re-run assets if they fail.
+
+- Build bash file to perform bulking load automatically (use shared volume).
+
+- Build data-pipeline test case to make sure it works (at early stage).
+
+- Apply new query optimization strategies in PostgreSQL (especially when data batch is becoming larger).
 
 ## What errors can be appeared in this pipeline ?
 
@@ -41,7 +47,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Case 2: Parameter of provided APIs is changed or name of columns changed, ....
 
-- That why we need sensors to solve these problems
+- That why we need sensors to solve these problems.
 
 ## Data Pipeline
 
