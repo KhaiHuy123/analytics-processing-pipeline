@@ -89,20 +89,6 @@ def load_data_from_api(api_list) -> pl.DataFrame:
     return combined_df
 
 
-def load_all_data_from_online_file(api_list, context: AssetExecutionContext, batch_size=1000) -> pl.DataFrame:
-    all_data = pl.DataFrame()
-    offset = 0
-
-    while True:
-        batch_data = load_data_from_online_file(api_list, context)
-        if batch_data.is_empty():
-            break
-        all_data = pl.concat([all_data, batch_data], how="vertical", parallel=True)
-        offset += batch_size
-
-    return all_data
-
-
 def load_data_from_online_file(api_list, context: AssetExecutionContext) -> pl.DataFrame:
     dataframes = []
     http = urllib3.PoolManager()
