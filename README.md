@@ -35,8 +35,6 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Build sensors in Dagster to automatically re-run assets if they fail.
 
-- Build bash file to perform bulking load automatically (use shared volume).
-
 - Build data-pipeline test case to make sure it works (at early stage).
 
 - Apply new query optimization strategies in PostgreSQL (especially when data batch is becoming larger).
