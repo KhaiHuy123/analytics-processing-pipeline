@@ -78,7 +78,6 @@ services:
     volumes:
       - shared_volume:/opt/dagster/app/datasource_init/data
       - shared_volume_app:/opt/dagster/app/processed_data
-
     networks:
       - thes_network
     ports:
