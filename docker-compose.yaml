@@ -34,6 +34,7 @@ services:
     container_name: thes_mysql
     volumes:
       - ./datasource_process/warehouse_setup/:/docker-entrypoint-initdb.d/
+      - ./mysql:/var/lib/mysql/
       - shared_volume:/shared_data/
     ports:
       - "3306:3306"
@@ -88,6 +89,7 @@ services:
       build:
         context: ./processed_data
         dockerfile: ./Dockerfile
+      image: analytics-processing-pipeline-dashboard_app:latest
       container_name: dashboard_app
       env_file:
         - .env
@@ -104,7 +106,7 @@ services:
     build:
       context: ./dagster_home
       dockerfile: ./Dockerfile
-    image: thes_dagster
+    image: thes_dagster:latest
     container_name: dagster
     depends_on:
       dagster_dbt_processing:
@@ -133,6 +135,8 @@ services:
       - DAGSTER_PG_PASSWORD=admin123 
       - DAGSTER_PG_HOST=dagster_postgres 
       - DAGSTER_PG_DB_HOST_AUTH_METHOD=trust 
+    volumes:
+      - dagster_postgres_data:/var/lib/postgresql/data
     networks:
       - thes_network
     external_links:
@@ -209,6 +213,9 @@ volumes:
   shared_volume_app:
     driver: local
     name: shared_volume_app
+  dagster_postgres_data:
+    driver: local
+    name: dagster_postgres_data
 
 networks:
   thes_network:

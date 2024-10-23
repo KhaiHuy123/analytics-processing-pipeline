@@ -18,5 +18,4 @@ urllib3
 minio
 psycopg2-binary
 mysql-connector-python
-urllib3
-minio
+

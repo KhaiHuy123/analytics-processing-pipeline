@@ -35,7 +35,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Build sensors in Dagster to automatically re-run assets if they fail.
 
-- Build data-pipeline test case to make sure it works (at early stage).
+- Build data-pipeline test cases to check if it works (at early stage).
 
 - Apply new query optimization strategies in PostgreSQL (especially when data batch is becoming larger).
 
@@ -49,8 +49,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Data Pipeline
 
-![image](https://github.com/user-attachments/assets/a48e5c9a-8597-4960-a9f9-c035254ecba5)
-
+![image](https://github.com/user-attachments/assets/79e41ce9-14b9-4cb6-a64c-bb5bb1a6d471)
 
 ## The data pipeline execution can be summarized as follows
 
