@@ -163,7 +163,11 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - After cloning section, you can't use this pipeline immediately because you don't have `manifest.json` in your `dbt project`. Without this file, you can't activate the pipeline.
 
-- Comment all codes related to `dbt_asets` in module `dagster_dbt_processing/__init__.py` and `dagster_dbt_processing/asets/__init__.py`. After that, cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/asets/` (paste them at somewhere you can remember). Try to run this pipeline locally. You need to replace domain name of services in `docker network` by `localhost` to run it.
+- Comment all codes related to `dbt_asets` in module `dagster_dbt_processing` and `dagster_dbt_processing/asets`.
+
+- Cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/asets/` (paste them at somewhere you can remember).
+
+- Try to run this pipeline locally. You need to replace domain name of services in `docker network` by `localhost` to run it.
 
 - Run `dbt pipeline` to create `manifest.json`. Read [this](https://github.com/KhaiHuy123/analytics-processing-pipeline/tree/main/dbt_processing/transform#readme) for more details. 
 
