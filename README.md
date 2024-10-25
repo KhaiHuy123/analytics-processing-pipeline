@@ -157,16 +157,24 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Next, make sure you have installed [Docker](https://www.docker.com/) on your local machine. If not, that's ok, because they will help you with that. How to use Docker Desktop ? [Watch this](https://www.youtube.com/watch?v=7y50rZItKCQ)
 
-- Finally, you can clone this respository and execute pipeline. Read [run.md](https://github.com/KhaiHuy123/taxi-nyc-processing-pipeline/blob/main/run.md) for more details.
+- You can clone this respository and execute pipeline. Read [run.md](https://github.com/KhaiHuy123/taxi-nyc-processing-pipeline/blob/main/run.md) for more details.
 
 - How to clone this respository ? [Watcth this](https://www.youtube.com/watch?v=8Dd7KRpKeaE)
 
-- After cloning section, just run `docker-compose build` and run `docker-compose up -d` after all containers are built.
+- After cloning section, you can't use this pipeline immediately because you don't have `manifest.json` in your `dbt project`. Without this file, you can't activate the pipeline.
 
-- Before dockerizing pipeline, make sure it works on local environment. Try to run this pipeline on local several times. You need to replace domain name of services in `docker network` by `localhost` to run it on local environment. 
+- Comment all codes related to `dbt_asets` in module `dagster_dbt_processing/__init__.py` and `dagster_dbt_processing/asets/__init__.py`. After that, cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/asets/` (paste them at somewhere you can remember). Try to run this pipeline locally. You need to replace domain name of services in `docker network` by `localhost` to run it.
+
+- Run `dbt pipeline` to create `manifest.json`. Read [this](https://github.com/KhaiHuy123/analytics-processing-pipeline/tree/main/dbt_processing/transform#readme) for more details. 
+
+- After running `dbt pipeline`, you will see the `manifest.json` in `target folder` of `dbt project`. 
+
+- Replace `localhost` by `domain name` of services.
+
+- Bring `dbt folder` and `data_source folder` back to their original places.
   
-- You should have all data in PostgreSQL database before running `DBT pipeline`. After running `DBT pipeline`, you will see the `manifest.json` in `target` folder of `dbt project`. Without this file, we can not activate the pipeline.  
-
+- Run `docker-compose build` to build services and run `docker-compose up -d` after all containers are built.
+  
 - If you are using Docker Destop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good Luck !
 
 ![image](https://github.com/user-attachments/assets/dfe418d6-6671-4092-8bde-19b0d5c006b9)
