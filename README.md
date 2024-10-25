@@ -163,6 +163,8 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - After cloning section, just run `docker-compose build` and run `docker-compose up -d` after all containers are built.
 
+- Hint : before dockerizing pipeline, make sure it works on local environment. Try to run this pipeline on local several times. We should have all data in our PostgreSQL database before running `DBT pipeline`. After running DBT pipeline, you will see the `manifest.json` in `target` folder of `dbt project`. Without this file, we can not activate the pipeline.  
+
 - If you are using Docker Destop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good Luck !
 
 ![image](https://github.com/user-attachments/assets/4f39dfbc-eade-406f-a9a9-684e53b6b306)
