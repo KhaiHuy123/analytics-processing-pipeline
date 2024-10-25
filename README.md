@@ -167,7 +167,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/asets/` (paste them at somewhere you can remember).
 
-- Try to run this pipeline locally. You need to replace domain name of services in `docker network` by `localhost` to run it.
+- Try to run this pipeline locally. You need to replace `domain name` of services in `docker network` by `localhost` to run it.
 
 - Run `dbt pipeline` to create `manifest.json`. Read [this](https://github.com/KhaiHuy123/analytics-processing-pipeline/tree/main/dbt_processing/transform#readme) for more details. 
 
