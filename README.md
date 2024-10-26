@@ -163,7 +163,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - After cloning section, you can't use this pipeline immediately because you don't have `manifest.json` in your `dbt project`. Without this file, you can't activate the pipeline.
 
-- Comment all codes related to `dbt_asets` in module `dagster_dbt_processing` and `dagster_dbt_processing/assets`.
+- Comment all codes related to `dbt_assets` in module `dagster_dbt_processing/__init__.py` and `dagster_dbt_processing/assets/__init__.py`.
 
 - Cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/asets/` (paste them at somewhere you can remember).
 
