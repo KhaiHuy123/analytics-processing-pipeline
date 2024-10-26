@@ -165,7 +165,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Comment all codes related to `dbt_assets` in module `dagster_dbt_processing/__init__.py` and `dagster_dbt_processing/assets/__init__.py`.
 
-- Cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/asets/` (paste them at somewhere you can remember).
+- Cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/assets/` (paste them at somewhere you can remember).
 
 - Try to run this pipeline locally. You need to replace `domain name` of services in `docker network` by `localhost` to run it.
 
