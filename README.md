@@ -175,7 +175,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Replace `localhost` by `domain name` of services.
 
-- Bring `dbt folder` and `data_source folder` back to their original places.
+- Bring `dbt folder` and `data_source folder` back to their original places, uncomment codes related to `dbt_assets`.
   
 - Run `docker-compose build <service_name>` to build the remaining services and run `docker-compose up -d` after all containers are built.
   
