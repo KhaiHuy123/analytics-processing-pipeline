@@ -45,7 +45,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Case 2: Parameter of provided APIs is changed or name of columns changed, ....
 
-- That why we need sensors to solve these problems.
+- That's why we need sensors to solve these problems.
 
 ## Data Pipeline
 
@@ -153,23 +153,23 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## How to use this pipeline?
 
-- First, you need to create Mother Duck account. [Mother Duck](https://motherduck.com/) is the Cloud Service that provide us availability of using [DuckDB](https://duckdb.org/) on cloud environment.
+- You can clone this respository. How to clone this respository ? [Watcth this](https://www.youtube.com/watch?v=8Dd7KRpKeaE)
+  
+- First, you need to create Mother Duck account. [Mother Duck](https://motherduck.com/) is the Cloud Service that provide us availability of using [DuckDB](https://duckdb.org/) on cloud environment. After creating your account, use your own information and fill in missing parameters in `.env`.
 
 - Next, make sure you have installed [Docker](https://www.docker.com/) on your local machine. If not, that's ok, because they will help you with that. How to use Docker Desktop ? [Watch this](https://www.youtube.com/watch?v=7y50rZItKCQ)
-
-- You can clone this respository and execute pipeline. Read [run.md](https://github.com/KhaiHuy123/taxi-nyc-processing-pipeline/blob/main/run.md) for more details.
-
-- How to clone this respository ? [Watcth this](https://www.youtube.com/watch?v=8Dd7KRpKeaE)
 
 - After cloning section, you can't use this pipeline immediately because you don't have `manifest.json` in your `dbt project`. Without this file, you can't activate the pipeline.
 
 - Comment all codes related to `dbt_assets` in module `dagster_dbt_processing/__init__.py` and `dagster_dbt_processing/assets/__init__.py`.
 
-- Cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/assets/` (paste them at somewhere you can remember).
+- Cut `dbt folder` and `data_source folder` in `dagster_dbt_processing/assets/` (paste them at somewhere you can remember, you will use them later).
 
-- Try to run this pipeline locally. You need to replace `domain name` of services in `docker network` by `localhost` to run it.
+- Run `docker-compose build <service_name>` and `docker-compose up -d <service_name>` to create and use PostgreSQL and Minio.
+  
+- Try to run this pipeline locally. Read [run.md](https://github.com/KhaiHuy123/taxi-nyc-processing-pipeline/blob/main/run.md) for more details. You need to replace `domain name` of services in `docker network` by `localhost` to run it.
 
-- Run `dbt pipeline` to create `manifest.json`. Read [this](https://github.com/KhaiHuy123/analytics-processing-pipeline/tree/main/dbt_processing/transform#readme) for more details. 
+- Execute `dbt pipeline` to create `manifest.json`. Read [this](https://github.com/KhaiHuy123/analytics-processing-pipeline/tree/main/dbt_processing/transform#readme) for more details. 
 
 - After running `dbt pipeline`, you will see the `manifest.json` in `target folder` of `dbt project`. 
 
@@ -177,7 +177,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Bring `dbt folder` and `data_source folder` back to their original places.
   
-- Run `docker-compose build` to build services and run `docker-compose up -d` after all containers are built.
+- Run `docker-compose build <service_name>` to build the remaining services and run `docker-compose up -d` after all containers are built.
   
 - If you are using Docker Destop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good Luck !
 
