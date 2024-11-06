@@ -81,7 +81,7 @@ def anl_taxi_zone(context: AssetExecutionContext, duckdb: DuckDBResource):
                         schema=ZONES_SCHEMA, table=TABLE_ANL_TAXI_ZONES,
                         file_name=TABLE_ANL_TAXI_ZONES.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_ANL_TAXI_ZONES)
 
         metadata_mapping = create_column_value_dict(metadata)
 

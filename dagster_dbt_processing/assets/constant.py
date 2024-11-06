@@ -150,9 +150,9 @@ def review_null_value(df: pl.DataFrame, context: AssetExecutionContext):
     context.log.info(df.null_count().to_arrow())
 
 
-def fetch_metadata(conn):
+def fetch_metadata(conn, table_name):
     metadata = conn.execute(
-        f"SELECT * FROM duckdb_tables() WHERE table_name = '{TABLE_ANL_BASE_REPORT}'"
+        f"SELECT * FROM duckdb_tables() WHERE table_name = '{table_name}'"
     ).fetchdf()
     return metadata
 

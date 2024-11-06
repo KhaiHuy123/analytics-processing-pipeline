@@ -104,7 +104,7 @@ def anl_base_report(context: AssetExecutionContext, duckdb: DuckDBResource):
                         schema=SERVICES_SCHEMA, table=TABLE_ANL_DIM_AGG_BASE_NAME,
                         file_name=TABLE_ANL_DIM_AGG_BASE_NAME.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn=conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_ANL_BASE_REPORT)
 
         metadata_mapping = create_column_value_dict(metadata)
 

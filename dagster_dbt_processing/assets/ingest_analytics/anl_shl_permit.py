@@ -115,7 +115,7 @@ def anl_shl_permit(context: AssetExecutionContext, duckdb: DuckDBResource):
                         schema=SERVICES_SCHEMA, table=TABLE_ANL_DIM_BASE,
                         file_name=TABLE_ANL_DIM_BASE.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn=conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_ANL_SHL_PERMIT)
 
         metadata_mapping = create_column_value_dict(metadata)
 

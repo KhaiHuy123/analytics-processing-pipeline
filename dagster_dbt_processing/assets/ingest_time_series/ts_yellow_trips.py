@@ -108,7 +108,7 @@ def ts_yellow_trips(context: AssetExecutionContext, duckdb: DuckDBResource):
                             file_name=TABLE_TS_DIM_VENDOR.lower().replace("_", ""), context=context, idx=idx)
             context.log.info(f"Processing {sub_list} finished _ idx : {idx}")
 
-        metadata = fetch_metadata(conn=conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_TS_YELLOW_TRIPS)
 
         metadata_mapping = create_column_value_dict(metadata)
 

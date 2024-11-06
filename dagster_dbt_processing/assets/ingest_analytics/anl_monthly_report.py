@@ -87,7 +87,7 @@ def anl_monthly_report(context: AssetExecutionContext, duckdb: DuckDBResource):
                         schema=REPORT_SCHEMA, table=TABLE_ANL_MONTHLY_REPORT,
                         file_name=TABLE_ANL_MONTHLY_REPORT.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_ANL_MONTHLY_REPORT)
 
         metadata_mapping = create_column_value_dict(metadata)
 

@@ -75,7 +75,7 @@ def geo_nta(context: AssetExecutionContext, duckdb: DuckDBResource):
                         schema=ZONES_SCHEMA, table=TABLE_GEO_NTA,
                         file_name=TABLE_GEO_NTA.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn=conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_GEO_NTA)
 
         metadata_mapping = create_column_value_dict(metadata)
 

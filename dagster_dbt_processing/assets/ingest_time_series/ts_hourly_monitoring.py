@@ -81,7 +81,7 @@ def ts_hourly_monitoring(context: AssetExecutionContext, duckdb: DuckDBResource)
                         schema=ENV_SCHEMA, table=TABLE_TS_HOURLY_MONITORING,
                         file_name=TABLE_TS_HOURLY_MONITORING.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_TS_HOURLY_MONITORING)
 
         metadata_mapping = create_column_value_dict(metadata)
 

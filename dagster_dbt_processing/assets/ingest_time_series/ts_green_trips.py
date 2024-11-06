@@ -118,7 +118,7 @@ def ts_green_trips(context: AssetExecutionContext, duckdb: DuckDBResource):
 
             context.log.info(f"Processing {sub_list} finished _ idx : {idx}")
 
-        metadata = fetch_metadata(conn=conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_TS_GREEN_TRIPS)
 
         metadata_mapping = create_column_value_dict(metadata)
 

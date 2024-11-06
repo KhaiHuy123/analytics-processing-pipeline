@@ -87,7 +87,7 @@ def anl_meter_shop(context: AssetExecutionContext, duckdb: DuckDBResource):
                         schema=REPORT_SCHEMA, table=TABLE_ANL_METER_SHOPS,
                         file_name=TABLE_ANL_METER_SHOPS.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_ANL_METER_SHOPS)
 
         metadata_mapping = create_column_value_dict(metadata)
 

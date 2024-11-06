@@ -119,7 +119,7 @@ def anl_lost_property(context: AssetExecutionContext, duckdb: DuckDBResource):
                         schema=SERVICES_SCHEMA, table=TABLE_ANL_DIM_LOST_PROPERTY_VEHICLES,
                         file_name=TABLE_ANL_DIM_LOST_PROPERTY_VEHICLES.lower().replace("_", ""), context=context)
 
-        metadata = fetch_metadata(conn=conn)
+        metadata = fetch_metadata(conn=conn, table_name=TABLE_ANL_LOST_PROPERTY)
 
         metadata_mapping = create_column_value_dict(metadata)
 
