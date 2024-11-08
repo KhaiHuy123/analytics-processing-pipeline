@@ -20,17 +20,7 @@ class MinIOHelper:
     def read_dataframe(minio_client: Minio, bucket_name, object_name,
                        file_extension, version_id, context):
         try:
-            if file_extension == 'json':
-                data = minio_client.get_object(bucket_name=bucket_name,
-                                               object_name=object_name,
-                                               version_id=version_id).read().decode("utf-8")
-                return pl.DataFrame(json.loads(data))
-            elif file_extension == 'csv':
-                data = minio_client.get_object(bucket_name=bucket_name,
-                                               object_name=object_name,
-                                               version_id=version_id).read().decode("utf-8")
-                return pl.read_csv(io.StringIO(data))
-            elif file_extension == 'parquet':
+            if file_extension == 'parquet':
                 parquet_object = minio_client.get_object(bucket_name=bucket_name,
                                                          object_name=object_name,
                                                          version_id=version_id)
@@ -46,15 +36,7 @@ class MinIOHelper:
     def upload_dataframe(minio_client: Minio, bucket_name, object_name,
                          dataframe: pd.DataFrame, file_extension, context):
         try:
-            if file_extension == 'json':
-                json_data = dataframe.to_json()
-                minio_client.put_object(bucket_name, object_name,
-                                        io.BytesIO(json_data.encode()), len(json_data), 'application/json')
-            elif file_extension == 'csv':
-                csv_data = dataframe.to_csv()
-                minio_client.put_object(bucket_name, object_name,
-                                        io.BytesIO(csv_data.encode()), len(csv_data), 'text/csv')
-            elif file_extension == 'parquet':
+            if file_extension == 'parquet':
                 with io.BytesIO() as buffer:
                     dataframe.to_parquet(buffer)
                     buffer.seek(0)

@@ -40,7 +40,7 @@ class MySQL_IOManager(IOManager):
             cursor.close()
 
     @staticmethod
-    def drop_table_if_not_exists(connection, table_name, context):
+    def drop_table_if_exists(connection, table_name, context):
         cursor = connection.cursor()
         # Define table drop query
         drop_table_query = f"DROP TABLE IF EXISTS {table_name} CASCADE;"
@@ -193,7 +193,7 @@ class MySQL_IOManager(IOManager):
         context.log.info("Create connection successfully ")
 
         # Drop database if exists
-        self.drop_table_if_not_exists(connection, table_name, context)
+        self.drop_table_if_exists(connection, table_name, context)
 
         # Create table
         self.create_table_if_not_exists(connection, table_name, columns_type, context, primary_keys)

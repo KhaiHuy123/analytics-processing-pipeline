@@ -244,13 +244,6 @@ def clean_dataframe(df: pl.DataFrame) -> pl.DataFrame:
     return df
 
 
-def cast_dtype(df: pl.DataFrame, columns, dtype):
-    for column in columns:
-        df = df.with_columns(
-            pl.col(column).cast(dtype, strict=False).alias(column)
-        )
-
-
 def get_distribution_type(skew: float) -> str:
     if skew == 0:
         return "balanced"
@@ -312,13 +305,6 @@ def find_most_frequent_value(data_list):
         return None
     mode_value = Counter(data_list).most_common(1)[0][0]
     return mode_value
-
-
-def overall_correlation(data: pd.DataFrame, threshold=0.5):
-    corr_matrix = data.corr().abs()
-    np.fill_diagonal(corr_matrix.values, np.nan)
-    high_corr_pairs_ratio = (corr_matrix > threshold).sum().sum() / (data.shape[1] * (data.shape[1] - 1))
-    return high_corr_pairs_ratio
 
 
 def recommended_value_filled(df: pl.DataFrame, col_names, context: AssetExecutionContext,
@@ -623,43 +609,6 @@ def create_table_from_polars_dataframe(df: pl.DataFrame, schema_name: str, table
         raise ValueError(f"{e}")
 
 
-def create_table_from_geo_dataframe(gdf: gpd.GeoDataFrame, schema_name: str, table_name: str,
-                                    mapping_dtype_references: dict, conn, context: AssetExecutionContext):
-
-    if not schema_name or not table_name:
-        raise ValueError("`schema_name` or `table_name` can not be empty or table has already exist")
-
-    with conn:
-        try:
-
-            geom_col_name = gdf.geometry.name
-            geom_type = gdf.geometry.geom_type
-
-            sql_create_table = f"""
-                CREATE OR REPLACE TABLE {schema_name}.{table_name} (
-                    {geom_col_name} {mapping_dtype_references[geom_type]},
-            """
-
-            for col_name in gdf.columns:
-                if col_name != geom_col_name:
-                    dtype = gdf.dtypes[col_name]
-
-                    duckdb_dtype = mapping_dtype_references[dtype.name]
-                    sql_create_table += f"""
-                            {col_name} {duckdb_dtype},
-                        """
-            sql_create_table = sql_create_table[:-2]
-            sql_create_table += ")"
-            conn.execute(sql_create_table)
-            context.log.info(f"Create {schema_name}.{table_name} successfully!")
-
-            conn.execute(f"SELECT * FROM {schema_name}.{table_name}").fetchdf()
-            context.log.info("View Created Table")
-        except Exception as e:
-            context.log.error(f"Error occurred while creating table as : {e}")
-            raise ValueError(f"{e}")
-
-
 def insert_data_into_table(conn, df, schema_name, table_name, context, use_pyarrow=True):
     try:
         if use_pyarrow:
@@ -955,18 +904,6 @@ def download_data_from_minio(config, bucket_name, object_name, context: AssetExe
     context.log.info(f"{path}")
 
 
-def load_dataframe_to_duckdb(df, db_file, table_name):
-    con = db.connect(db_file)
-    con.execute(f"DROP TABLE IF EXISTS {table_name}")
-    if isinstance(df, pd.DataFrame):
-        df = pl.DataFrame(df)
-    if isinstance(df, pl.DataFrame):
-        con.execute(f"CREATE TABLE {table_name} AS SELECT * FROM df")
-    else:
-        raise TypeError("df must be pandas.DataFrame or polars.DataFrame")
-    con.close()
-
-
 def execute_query_and_log_performance(context: OpExecutionContext, query: SQL, duckdb_io_manager: DuckDB_IOManager,
                                       query_name: str = None):
     start_time = time.time()
@@ -993,13 +930,6 @@ def get_pandas_dtypes(df, context):
         context.log.info(f"{col}: {df[col].dtype}")
 
 
-def get_polars_dtypes(df, context):
-    context.log.info("Fetch by polars dataframe")
-    context.log.info("Data Type for columns:")
-    for col in df.schema.column_names:
-        context.log.info(f"{col}: {df.schema[col].dtype}")
-
-
 def get_arrow_dtypes(table, context):
     context.log.info("Fetch by arrow table ")
     context.log.info("Data Type for columns:")
@@ -1022,15 +952,6 @@ def query_table(table_name: str, duckdb: DuckDBResource) -> SQL:
     with duckdb.get_connection() as conn:
         result = conn.sql(statement).fetch_arrow_table()
     return SQL("SELECT * FROM $df", df=result)
-
-
-@op(name="join_table",
-    description="Executes a pre-defined join statement using DuckDB ",
-    retry_policy=retry_policy)
-def join_tables(statement, duckdb: DuckDBResource) -> SQL:
-    with duckdb.get_connection() as conn:
-        joined_query_statement = conn.sql(statement).fetch_arrow_table()
-    return SQL("SELECT * FROM $df", df=joined_query_statement)
 
 
 @op(name="collect_data",
