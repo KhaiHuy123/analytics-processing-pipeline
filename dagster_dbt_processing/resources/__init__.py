@@ -6,7 +6,6 @@ from .duckdb_io_manager import DuckDB_IOManager, DuckDB
 from .postgres_io_manager import PostgresSQL_IOManager
 from .minio_io_manager import MinIO_IOManager
 from .postgres_extractor import PostgresExtractor
-from .mysql_io_manager import MySQL_IOManager
 
 
 def create_minio_config(bucket):
@@ -28,16 +27,6 @@ def create_psql_config(database, schema):
         "schema": os.getenv(schema)
     }
 
-
-def create_mysql_config(database):
-    return {
-        "host": os.getenv("MYSQL_HOST"),
-        "database": os.getenv(database),
-        "user": os.getenv("MYSQL_USER"),
-        "password": os.getenv("MYSQL_PASSWORD"),
-    }
-
-
 PSQL_ZONES_SCHEMA_CONFIG = create_psql_config("POSTGRES_DB", "POSTGRES_ZONES")
 PSQL_SERVICE_SCHEMA_CONFIG = create_psql_config("POSTGRES_DB", "POSTGRES_SERVICES")
 PSQL_REPORT_SCHEMA_CONFIG = create_psql_config("POSTGRES_DB", "POSTGRES_REPORT")
@@ -47,13 +36,11 @@ MINIO_ANL_CONFIG = create_minio_config("MINIO_ANL_BUCKET")
 MINIO_GEO_CONFIG = create_minio_config("MINIO_GEO_BUCKET")
 MINIO_TS_CONFIG = create_minio_config("MINIO_TS_BUCKET")
 MINIO_MD_CONFIG = create_minio_config("MINIO_MD_BUCKET")
-MYSQL_CONFIG = create_mysql_config("MYSQL_DB")
 
 resources = {
     "dbt": DBT_RESOURCE,
     "duckdb": DUCKDB_RESOURCE,
     "duckdb_io_manager": DuckDB_IOManager(duckdb=DuckDB(url=os.getenv("MOTHER_DUCK_SHARE_URL"))),
-    "mysql_io_manager": MySQL_IOManager(config=MYSQL_CONFIG),
     "minio_anl_io_manager": MinIO_IOManager(config=MINIO_ANL_CONFIG),
     "minio_geo_io_manager": MinIO_IOManager(config=MINIO_GEO_CONFIG),
     "minio_ts_io_manager": MinIO_IOManager(config=MINIO_TS_CONFIG),

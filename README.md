@@ -107,17 +107,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
     POSTGRES_REPORT=report
     POSTGRES_TRIPS=trips
     POSTGRES_PROCESS=dbt_source_process
-    
-    # MySQL
-    MYSQL_HOST=thes_mysql
-    MYSQL_USER=mysql_user
-    MYSQL_PASSWORD=mysql_password
-    MYSQL_ROOT_PASSWORD=mysql_root_password
-    MYSQL_DB=mysql_database
-    MYSQL_ZONES=zones
-    MYSQL_SERVICES=services
-    MYSQL_REPORT=report
-    
+        
     # Dagster
     DAGSTER_PG_HOST=dagster_postgres
     DAGSTER_PG_USER=admin_user

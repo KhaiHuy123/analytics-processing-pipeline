@@ -7,7 +7,6 @@ import re
 import numpy as np
 import requests
 import polars as pl
-import geopandas as gpd
 import pandas as pd
 import urllib3
 from io import BytesIO
