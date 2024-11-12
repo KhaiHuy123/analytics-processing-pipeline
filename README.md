@@ -1,5 +1,5 @@
 # Taxi-NYC-Processing Pipeline 
-- [DEMO VIDEO](https://drive.google.com/drive/folders/1RyPruEoPn-zYbq3FFYwOhJEzLBbye8sv?usp=sharing)
+- [VIEW DEMO](https://drive.google.com/drive/folders/1RyPruEoPn-zYbq3FFYwOhJEzLBbye8sv?usp=sharing)
 
 ## Dashboard
 
@@ -15,19 +15,19 @@
 
 References: [Open Data NYC](https://opendata.cityofnewyork.us/data/) 
 
-- Taxi data Open Data NYC (lastest version)
+- Taxi data from Open Data NYC (latest version)
 
-- Taxi Aggregated data (lastest version)
+- Taxi aggregated data (latest version)
 
-- Taxi Trip data (lastest version)
+- Taxi trip data (latest version)
 
 ## Update Policy
 
-- According to TLC (Taxi Limousine Commisson), taxi-data is provided in different domains and forms.
+- According to TLC(Taxi & Limousine Commission), taxi data is provided in various domains and formats.
 
-- TLC is the company that control and operate taxi industry in New York.
+- TLC is the company that controls and operates taxi industry in New York.
 
-- More details ? [Watch this](https://www.nyc.gov/site/tlc/index.page)  
+- For more details, visit the [TLC website](https://www.nyc.gov/site/tlc/index.page)
 
 ## Future Development 
 
@@ -35,15 +35,15 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Build sensors in Dagster to automatically re-run assets if they fail.
 
-- Build data-pipeline test cases to check if it works (at early stage).
+- Build data pipeline test cases to check if it works (at early stage).
 
-- Apply new query optimization strategies in PostgreSQL (especially when data batch is becoming larger).
+- Apply new query optimization strategies in PostgreSQL (especially when data batch grows larger).
 
-## What errors can be appeared in this pipeline ?
+## Possible errors in this pipeline ?
 
 - Case 1: Request timeout (because of Mother Duck Server)
 
-- Case 2: Parameter of provided APIs is changed or name of columns changed, ....
+- Case 2: Parameter of provided APIs changed or name of columns changed, ....
 
 - That's why we need sensors to solve these problems.
 
@@ -72,16 +72,16 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
     Note that since DuckDB is an embedded database, all data will be deleted after loading and logging.
 
   
-- Data Transfer to Postgres:
+- Data Transfer to PostgreSQL:
   
-    Download data from MinIO to the local machine as CSV files in preparation for loading into Postgres.
+    Download data from MinIO to the local machine as CSV files in preparation for loading into PostgreSQL.
   
     Automatically generate DML statements, including primary keys, foreign keys, and indexes (if applicable).
   
   
 - DBT Execution:
   
-    Execute the DBT pipeline after data has been loaded into Postgres.
+    Execute the DBT pipeline after data has been loaded into PostgreSQL.
   
     After this step, all data information will be aggregated and stored as files on the local machine.
 
@@ -90,11 +90,11 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
  
   Visualize the data using Streamlit.
 
-## Technique
+## Configuration
 
     .env
     
-    # PostgresSQL
+    # PostgreSQL
     POSTGRES_HOST=thes_psql
     POSTGRES_PORT=5432
     POSTGRES_DB=admin_database
@@ -135,7 +135,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Why I designed pipeline like this ?
 
-- We need to determined how we can use collected data, make sure you know how and when they are updated.
+- We need to determine how we can use collected data, make sure you know how and when they are updated.
 
 - You can manually choose what data that you want to analyze because these codes are generated dynamically so we can process any kind of tabular data.
 
@@ -169,7 +169,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
   
 - Run `docker-compose build <service_name>` to build the remaining services and run `docker-compose up -d` after all containers are built.
   
-- If you are using Docker Destop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good Luck !
+- If you are using Docker Desktop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good Luck !
 
 ![image](https://github.com/user-attachments/assets/dfe418d6-6671-4092-8bde-19b0d5c006b9)
 
