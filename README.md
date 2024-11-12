@@ -23,7 +23,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Update Policy
 
-- According to TLC(Taxi & Limousine Commission), taxi data is provided in various domains and formats.
+- According to TLC (Taxi & Limousine Commission), taxi data is provided in various domains and formats.
 
 - TLC is the company that controls and operates taxi industry in New York.
 
