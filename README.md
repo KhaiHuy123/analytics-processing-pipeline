@@ -15,11 +15,11 @@
 
 References: [Open Data NYC](https://opendata.cityofnewyork.us/data/) 
 
-- Taxi data from Open Data NYC (latest version)
+- Taxi data from Open Data NYC (latest version).
 
-- Taxi aggregated data (latest version)
+- Taxi aggregated data (latest version).
 
-- Taxi trip data (latest version)
+- Taxi trip data (latest version).
 
 ## Update Policy
 
@@ -27,7 +27,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - TLC is the company that controls and operates taxi industry in New York.
 
-- For more details, visit the [TLC website](https://www.nyc.gov/site/tlc/index.page)
+- For more details, visit the [TLC website](https://www.nyc.gov/site/tlc/index.page).
 
 ## Future Development 
 
@@ -41,7 +41,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Possible errors in this pipeline ?
 
-- Case 1: Request timeout (because of Mother Duck Server)
+- Case 1: Request timeout (because of Mother Duck Server).
 
 - Case 2: Parameter of provided APIs changed or name of columns changed, ....
 
@@ -143,11 +143,11 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## How to use this pipeline?
 
-- You can clone this respository. How to clone this respository ? [Watcth this](https://www.youtube.com/watch?v=8Dd7KRpKeaE)
+- You can clone this respository. How to clone this respository ? [Watch this](https://www.youtube.com/watch?v=8Dd7KRpKeaE).
   
-- First, you need to create Mother Duck account. [Mother Duck](https://motherduck.com/) is the Cloud Service that provide us availability of using [DuckDB](https://duckdb.org/) on cloud environment. After creating your account, use your own information and fill in missing parameters in `.env`.
+- First, you need to create Mother Duck account. [Mother Duck](https://motherduck.com/) is the Cloud Service that provide us availability of using [DuckDB](https://duckdb.org/) on cloud environment. After creating your account, use your own information and fill in missing parameters in `.env` file.
 
-- Next, make sure you have installed [Docker](https://www.docker.com/) on your local machine. If not, that's ok, because they will help you with that. How to use Docker Desktop ? [Watch this](https://www.youtube.com/watch?v=7y50rZItKCQ)
+- Next, make sure you have installed [Docker](https://www.docker.com/) on your local machine. If not, that's ok, because they will help you with that. How to use Docker Desktop ? [Watch this](https://www.youtube.com/watch?v=7y50rZItKCQ).
 
 - After cloning section, you can't use this pipeline immediately because you don't have `manifest.json` in your `dbt project`. Without this file, you can't activate the pipeline.
 
@@ -169,7 +169,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
   
 - Run `docker-compose build <service_name>` to build the remaining services and run `docker-compose up -d` after all containers are built.
   
-- If you are using Docker Desktop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good Luck !
+- If you are using Docker Desktop and you can see these below pictures on your screen, it means your analytics system is ready to work. Good luck !
 
 ![image](https://github.com/user-attachments/assets/dfe418d6-6671-4092-8bde-19b0d5c006b9)
 
