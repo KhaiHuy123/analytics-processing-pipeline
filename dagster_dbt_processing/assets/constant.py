@@ -1395,9 +1395,6 @@ PROCESS_LAYER = "process"
 # dbt group name
 DBT_GROUP_NAME = "dbt"
 
-# airbyte group name
-AIRBYTE_GROUP_NAME = "airbyte"
-
 # ingest
 INGEST_ANL_GROUP_NAME = "ingest_anl"
 INGEST_GEO_GROUP_NAME = "ingest_geo"

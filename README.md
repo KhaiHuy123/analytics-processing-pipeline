@@ -23,7 +23,7 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 ## Update Policy
 
-- According to TLC(Taxi & Limousine Commission), taxi data is provided in various domains and formats.
+- According to TLC (Taxi & Limousine Commission), taxi data is provided in various domains and formats.
 
 - TLC is the company that controls and operates taxi industry in New York.
 
@@ -33,11 +33,11 @@ References: [Open Data NYC](https://opendata.cityofnewyork.us/data/)
 
 - Build a machine learning model on Google Colab to perform time series forecasting.
 
-- Build sensors in Dagster to automatically re-run assets if they fail.
+- Build sensors in Dagster to automatically re-run assets if they fail. (Done)
 
-- Build data pipeline test cases to check if it works (at early stage).
+- Build data pipeline test cases to check if it works at early stage. (Done)
 
-- Apply new query optimization strategies in PostgreSQL (especially when data batch grows larger).
+- Apply new query optimization strategies in PostgreSQL when data batch grows larger.
 
 ## Possible errors in this pipeline ?
 

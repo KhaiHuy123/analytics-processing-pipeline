@@ -17,4 +17,4 @@ shapely
 urllib3
 minio
 psycopg2-binary
-
+pytest

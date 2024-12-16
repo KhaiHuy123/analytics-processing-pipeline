@@ -15,6 +15,7 @@ from .schedules import (
     preview_anl_data_schedule, preview_geo_data_schedule, preview_ts_data_schedule
 )
 from .resources import resources
+from .sensors import all_sensors
 
 all_assets = [*dbt_assets,  *ingest_set_up_assets,
               *infras_anl_assets, *data_source_assets,
@@ -31,5 +32,6 @@ definitions = Definitions(
     resources=resources,
     jobs=all_jobs,
     schedules=all_schedules,
+    sensors=all_sensors
 )
 
