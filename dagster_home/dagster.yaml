@@ -64,3 +64,6 @@ run_launcher:
       - DAGSTER_PG_USER
       - DAGSTER_PG_PASSWORD
       - DAGSTER_PG_DB
+
+telemetry:
+  enabled: false
