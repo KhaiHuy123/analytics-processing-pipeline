@@ -1,0 +1,16 @@
+
+version: 2
+
+models:
+  - name: report_monthly
+    columns:
+      - name: trips_per_day
+        data_type: "numeric"
+      - name: farebox_per_day
+        data_type: "numeric"
+      - name: unique_drivers
+        data_type: "numeric"
+      - name: unique_vehicles
+        data_type: "numeric"
+      - name: vehicles_per_day
+        data_type: "numeric"

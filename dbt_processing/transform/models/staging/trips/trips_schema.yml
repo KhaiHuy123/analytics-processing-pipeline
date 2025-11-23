@@ -1,0 +1,140 @@
+
+version: 2
+
+models:
+  - name: taxicab_fhv_trips
+    columns:
+      - name: pickup_datetime
+        data_type: "timestamp"
+      - name: dropoff_datetime
+        data_type: "timestamp"
+      - name: pulocationid
+        data_type: "numeric"
+      - name: dolocationid
+        data_type: "numertic"
+  - name: taxicab_green_trips
+    columns:
+      - name: lpep_dropoff_datetime
+        data_type: "timestamp"
+      - name: lpep_pickup_datetime
+        data_type: "timestamp"
+      - name: trip_distance
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: fare_amount
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: extra
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: mta_tax
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: tolls_amount
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: improvement_surcharge
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: total_amount
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: tip_amount
+        data_type: "float4"
+        tests:
+          - not_null
+  - name: taxicab_payment_type
+    columns:
+      - name: id
+        data_type: "int4"
+        tests:
+          - not_null
+      - name: payment_description
+        data_type: "text"
+        accepted_value:
+          [ "Credit card", "Cash", "No charge", "Dispute", "Voided trip", "Credit card", "Unknown", "UNKNOWN" ]
+  - name: taxicab_ratecode
+    columns:
+      - name: id
+        data_type: "int4"
+        tests:
+          - not_null
+      - name: ratecode_description
+        data_type: "text"
+        accepted_value:
+          [ "Standard rate", "JFK", "Newark", "Nassau or Westchester", "Negotiated fare", "Group ride", "Unknown", "unknown" ]
+  - name: taxicab_store_fwd_flag
+    columns:
+      - name: flag
+        data_type: "text"
+        tests:
+          - not_null
+        accepted_value:
+          [ "Y", "N", "y", "n" , "Yes", "No", "yes", "no", "YES", "NO" ]
+      - name: note
+        data_type: "text"
+        accepted_value:
+          [ "store and forward trip", "not a store and forward trip", "Unknown", "unknown" ]
+  - name: taxicab_trip_type
+    columns:
+      - name: id
+        data_type: "int4"
+        tests:
+          - not_null
+      - name: trip_type_description
+        data_type: "text"
+        accepted_value:
+          [ "Street-hail", "Dispatch", "Unknown", "unknown" ]
+  - name: taxicab_vendor
+    columns:
+      - name: id
+        data_type: "serial4"
+        tests:
+          - not_null
+      - name: vendor_name
+        data_type: "text"
+        accepted_value:
+          [ "Creative Mobile Technologies, LLC", "VeriFone Inc", "Unknown", "unknown" ]
+  - name: taxicab_yellow_trips
+    columns:
+      - name: tpep_dropoff_datetime
+        data_type: "timestamp"
+        tests:
+          - not_null
+      - name: tpep_pickup_datetime
+        data_type: "timestamp"
+        tests:
+          - not_null
+      - name: trip_distance
+        data_type: "float4"
+      - name: fare_amount
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: mta_tax
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: tolls_amount
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: improvement_surcharge
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: total_amount
+        data_type: "float4"
+        tests:
+          - not_null
+      - name: tip_amount
+        data_type: "float4"
+        tests:
+          - not_null
